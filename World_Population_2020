@@ -246,13 +246,13 @@ FROM countries;
 SELECT name, MAX(population), fertility_rate
 FROM countries;
 
---- Now that I know that the average fertility rate is 2.69. I wanted to see the countries who were above the average fertility rate. 
+--- Now that I know that the average fertility rate is 2.69, I wanted to see the countries who were above the average fertility rate. 
 SELECT name, population, fertility_rate
 FROM countries
 GROUP BY name
     HAVING fertility_rate > 2.69;
 
---- Here I was curious to see if countries were losing people due to migrantion and also had a declining population- What other reasons contribute to their loss of population? 
+--- Here I was curious to see if countries were losing people due to migration and also had a declining population- What other reasons contribute to their loss of population? 
 SELECT name, net_migrants, population_change
 FROM countries
 WHERE net_migrants < 0 AND population_change < 0  
