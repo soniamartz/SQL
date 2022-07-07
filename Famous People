@@ -1,0 +1,50 @@
+CREATE TABLE famous_people
+    (id INTEGER PRIMARY KEY AUTOINCREMENT, 
+    name TEXT, 
+    age INTEGER,
+    net_worth INTEGER); 
+
+INSERT INTO famous_people(name, age, net_worth) VALUES ("David Attenborough", 96, 35000000); 
+INSERT INTO famous_people(name, age, net_worth) VALUES ("Jane Goodall", 88, 5000000); 
+INSERT INTO famous_people(name, age, net_worth) VALUES ("Josh Gates", 44, 3000000);  
+INSERT INTO famous_people (name, age, net_worth) VALUES ("Greta Thunberg", 19, 100000); 
+INSERT INTO famous_people (name, age, net_worth) VALUES ("Chris Pratt", 43, 80000000); 
+INSERT INTO famous_people (name, age, net_worth) VALUES ("Steve Carell", 59, 80000000); 
+INSERT INTO famous_people (name, age, net_worth) VALUES ("Tom Segura", 43, 12000000); 
+INSERT INTO famous_people (name, age, net_worth) VALUES ("Melinda Gates", 57, 5400000000); 
+INSERT INTO famous_people (name, age, net_worth) VALUES ("Warren Buffett", 91, 95800000000);
+INSERT INTO famous_people (name, age, net_worth) VALUES ("Alexandria Ocasio-Cortez", 32, 200000); 
+INSERT INTO famous_people (name, age, net_worth) VALUES ("Stacy Abrams", 48, 3170000);
+INSERT INTO famous_people (name, age, net_worth) VALUES ("Ellen DeGeneres", 64, 500000000);
+INSERT INTO famous_people (name, age, net_worth) VALUES ("Jimmy Kimmel", 54, 50000000);
+INSERT INTO famous_people (name, age, net_worth) VALUES ("Natalie Portman", 41, 90000000); 
+INSERT INTO famous_people (name, age, net_worth) VALUES (" Priyanka Chopra", 39, 70000000); 
+
+CREATE TABLE influential_roles 
+    (id INTEGER PRIMARY KEY AUTOINCREMENT, 
+    name TEXT, 
+    background TEXT,
+    filmography TEXT);
+    
+INSERT INTO influential_roles (name, background, filmography) VALUES ("David Attenborough", "Biologist", "Planet Earth, Prehistoric Planet, The Green Planet, Frozen Planet, etc."); 
+INSERT INTO influential_roles (name, background, filmography) VALUES ("Jane Goodall", "Primatologist", "Change for Chimps, Jane, Jane Goodall: The Hope, Jane's Journey, etc."); 
+INSERT INTO influential_roles (name, background, filmography) VALUES ("Josh Gates", "Archaeologist", "Expedition Unknown, Destination Truth, Legendary Locations, etc."); 
+INSERT INTO influential_roles (name, background, filmography) VALUES ("Greta Thunberg", "Environmental Activist", "I am Greta, Greta Thunberg: A Year to Change the World, Make the World Greta Again"); 
+INSERT INTO influential_roles (name, background, filmography) VALUES ("Chris Pratt", "Actor", "Parks and Recreation,Parks Guardians of the Galaxy, Jurassic World, Passengers, The Tomorrow World, etc."); 
+INSERT INTO influential_roles (name, background, filmography) VALUES ("Steve Carell", "Actor", "The Office, The Morning Show, Space Force, The 40-Year-Old Virgin, etc."); INSERT INTO influential_roles (name, background, filmography) VALUES ("Tom Segura", "Comedian", "Completely Normal, Mostly Stories, Disgraceful, Ballhog");     
+INSERT INTO influential_roles (name, background, filmography) VALUES ("Melinda Gates", "Computer Scientist", "Inside Bill's Brain"); 
+INSERT INTO influential_roles (name, background, filmography) VALUES ("Warren Buffett", "Investor", "Buffett & Munger: A Wealth of Wisdom, Secret Millionaires Club");
+INSERT INTO influential_roles (name, background, filmography) VALUES ("Alexandria Ocasio-Cortez", "Politician", "Knock Down the House, Whose Vote Counts, Explained"); 
+INSERT INTO influential_roles (name, background, filmography) VALUES ("Stacy Abrams", "Politician", "All In: The Fight for Democracy"); 
+INSERT INTO influential_roles (name, background, filmography) VALUES ("Ellen DeGeneres", "Television Host", "The Ellen DeGeneres Show, Ellen's Game of Games, Ellen DeGeneres: Relatable, etc."); 
+INSERT INTO influential_roles (name, background, filmography) VALUES ("Jimmy Kimmel", "Television Host", "Jimmy Kimmel Live!, The Man Show"); 
+INSERT INTO influential_roles (name, background, filmography) VALUES ("Natalie Portman", "Actress", "Thor, V for Vendetta, Star Wars episode II, Star Wars episode III, etc."); 
+INSERT INTO influential_roles (name, background, filmography) VALUES ("Priyanka Chopra", "Actress", "Quantico, Baywatch, The White Tiger, The Matrix Resurrections, etc.");
+
+
+---This query joins the two tables & displays the individual's background, shows/movies they've starred in and their net worth. The list is ordered by their net worth in descending order. 
+SELECT f.name, i.background, i.filmography, f.net_worth
+FROM famous_people f
+    JOIN influential_roles i
+    ON f.name = i.name
+ORDER BY f.net_worth DESC;
