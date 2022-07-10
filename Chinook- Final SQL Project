@@ -1,0 +1,51 @@
+# To explore the dataset, I joined three tables from a database to display all the artists, their track names and the corresponding composers.
+SELECT artists.ArtistId, name AS Artist_Name, tracks.Name, tracks.Composer
+FROM chinook.artists
+JOIN chinook.albums    
+ON artists.ArtistId= albums.AlbumId
+JOIN chinook.tracks 
+ON albums.AlbumId= tracks.AlbumId
+
+# What are the total sales for 2012 in Germany? 
+SELECT SUM(Total)
+FROM chinook.invoices
+WHERE BillingCountry= "Germany" AND InvoiceDate BETWEEN '2012-01-01' AND '2012-12-31';
+
+# What was the average total per invoice by each sales agent? 
+SELECT emp.FirstName, emp.LastName, ROUND(AVG(inv.Total), 2) AS avg_sales
+FROM chinook.employees emp
+JOIN chinook.customers cust
+ON emp.EmployeeId= cust.SupportRepId
+JOIN chinook.invoices inv
+ON cust.CustomerId= inv.CustomerID
+WHERE emp.Title = "Sales Support Agent"
+GROUP BY emp.FirstName
+
+# Show the invoice total, customer's full name, and sales agent's name for invoices higher than the average invoice total. 
+SELECT invoices.Total, cust.FirstName, cust.LastName, emp.FirstName As Sales_Agent
+FROM chinook.employees emp
+JOIN chinook.customers cust
+ON emp.EmployeeId= cust.SupportRepId
+JOIN chinook.invoices 
+ON cust.CustomerId= invoices.CustomerID
+WHERE Total > (SELECT AVG(Total) FROM invoices)
+ORDER BY Total DESC;
+
+# What was the highest invoice total per sales agent listed in descending order? 
+SELECT emp.FirstName, emp.LastName, MAX(inv.Total) AS MAX_SALE
+FROM chinook.employees emp
+JOIN chinook.customers cust
+ON emp.EmployeeId= cust.SupportRepId
+JOIN chinook.invoices inv
+ON cust.CustomerId= inv.CustomerID
+WHERE emp.Title = "Sales Support Agent"
+GROUP BY emp.FirstName
+ORDER BY MAX_SALE DESC;
+
+# List the genres that are priced higher than the average genres in this database? 
+SELECT genres.name, tracks.name, UnitPrice
+FROM chinook.tracks
+JOIN chinook.genres
+ON tracks.GenreId= genres.GenreId 
+WHERE UnitPrice > (SELECT AVG(UnitPrice) FROM tracks)
+GROUP BY genres.name
