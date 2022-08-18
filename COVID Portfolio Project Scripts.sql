@@ -1,11 +1,10 @@
---Getting to know the tables
+--Getting to know the tables & data
 SELECT *
 FROM PortfolioProject..CovidDeaths
 where continent is not null
 
 SELECT *
 FROM PortfolioProject..CovidVaccinations
-
 
 SELECT Location, date, total_cases, new_cases, total_deaths, population
 FROM PortfolioProject..CovidDeaths
