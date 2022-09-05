@@ -1,0 +1,62 @@
+### These are a few of the SqlZoo questions that I enjoyed working. SELECT FROM WORLD & SELECT FROM NOBEL- a number from each. 
+
+### Exclusive OR (XOR). Show the countries that are big by area (more than 3 million) or big by population (more than 250 million) but not both. Show name, population and area.
+
+SELECT name, population, area
+FROM world
+WHERE (area > 3000000 OR population > 250000000) AND NOT (area > 3000000 AND population > 250000000)
+
+
+### Show the name and population in millions and the GDP in billions for the countries of the continent 'South America'. Use the ROUND function to show the values to two decimal places.
+
+SELECT name, ROUND(population/1000000, 2), ROUND(GDP/1000000000,2)
+FROM world 
+WHERE continent= 'South America' 
+
+### Show the name and capital where the name and the capital have the same number of characters.
+
+SELECT name, capital
+FROM world
+WHERE LEN(name) = LEN(capital)
+
+
+### Show the name and the capital where the first letters of each match. Don't include countries where the name and the capital are the same word.
+
+SELECT name, capital
+FROM world
+WHERE LEFT(name,1) = LEFT (capital, 1) and name <> capital
+
+
+### Find the country that has all the vowels and no spaces in its name.
+
+SELECT name
+FROM world
+WHERE name LIKE '%a%' AND name LIKE '%e%' AND name LIKE'%i%' AND name LIKE '%o%' AND name LIKE '%u%'
+AND name NOT LIKE '% %'
+
+### Find all details of the prize won by PETER GRÜNBERG. Here I learned how to type out the 'Ü'
+
+SELECT *
+FROM nobel 
+WHERE winner = 'Peter GrÜnberg'
+
+### Find all details of the prize won by EUGENE O'NEILL. ESCPAPING SINGLE QUOTES. 
+
+SELECT *
+FROM nobel
+WHERE winner= 'EUGENE O''NEILL'
+
+/*  This one is definitely my favorite as I learned how to use the IN statement in a new way. 
+Show the 1984 winners and subject ordered by subject and winner name; but list chemistry and physics last.
+*/
+
+SELECT winner, subject
+FROM nobel
+WHERE yr=1984
+ORDER BY 
+CASE WHEN subject IN ('Physics', 'Chemistry') THEN 1 ELSE 0 END,
+subject,winner
+
+
+
+
